@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  createUserWithEmailAndPassword,
+  // createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
 
@@ -15,7 +15,7 @@ import CreateUserPage from "./pages/CreateUser";
 import LoginPage from "./pages/Login";
 import UserProfilePage from "./pages/UserProfile";
 
-import Header from "./components/Header";
+// import Header from "./components/Header";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZ-QvGyKiP8YVv-JWxNTrT1a5bWiM1NEs",
@@ -26,26 +26,11 @@ const firebaseConfig = {
   appId: "1:1008656341652:web:fce2b13579e70beab17281",
 };
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <UserProfilePage />,
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/create",
-    element: <CreateUserPage />,
-  },
-]);
-
 function App() {
-  const [AppInitialized, setAppInitialized] = useState(false);
-  const [IsLoading, setIsLoading] = useState(true);
-  const [IsLoggedIn, setIsLoggedIn] = useState(false);
-  const [UserInformation, setUserInformation] = useState({});
+  const [appInitialized, setAppInitialized] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userInformation, setUserInformation] = useState({});
 
   useEffect(() => {
     initializeApp(firebaseConfig);
@@ -53,7 +38,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (AppInitialized) {
+    if (appInitialized) {
       const auth = getAuth();
       onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -63,13 +48,50 @@ function App() {
           setUserInformation({});
           setIsLoggedIn(false);
         }
+        setIsLoading(false);
       });
     }
-  }, [AppInitialized]);
+  }, [appInitialized]);
+
+  console.log(userInformation);
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <UserProfilePage
+          isLoading={isLoading}
+          isLoggedIn={isLoggedIn}
+          userInformation={userInformation}
+          setIsLoggedIn={setIsLoggedIn}
+          setUserInformation={setUserInformation}
+        />
+      ),
+    },
+    {
+      path: "/login",
+      element: (
+        <LoginPage
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+          setUserInformation={setUserInformation}
+        />
+      ),
+    },
+    {
+      path: "/create",
+      element: (
+        <CreateUserPage
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+          setUserInformation={setUserInformation}
+        />
+      ),
+    },
+  ]);
 
   return (
     <div className="App">
-      <Header />
       <RouterProvider router={router} />
     </div>
   );
