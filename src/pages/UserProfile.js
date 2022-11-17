@@ -12,7 +12,7 @@ function UserProfilePage({
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn && isLoading) navigate("/login");
+    if (!isLoggedIn || isLoading) navigate("/login");
   }, [isLoggedIn]);
 
   return (
