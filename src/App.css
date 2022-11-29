@@ -12,6 +12,7 @@ nav {
   width: 100%;
 }
 nav p {
+  cursor: pointer;
   text-decoration: underline;
 }
 
