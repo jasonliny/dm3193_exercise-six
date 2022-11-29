@@ -11,6 +11,10 @@ nav {
   max-width: 1000px;
   width: 100%;
 }
+nav p {
+  text-decoration: underline;
+}
+
 div p {
   color: black;
   font-size: 16px;

@@ -13,11 +13,12 @@ function UserProfilePage({
 
   useEffect(() => {
     if (!isLoggedIn || isLoading) navigate("/login");
-  }, [isLoggedIn]);
+  }, [isLoading, isLoggedIn, navigate]);
 
   return (
     <>
       <Header
+        isLoggedIn={isLoggedIn}
         setIsLoggedIn={setIsLoggedIn}
         setUserInformation={setUserInformation}
       />
