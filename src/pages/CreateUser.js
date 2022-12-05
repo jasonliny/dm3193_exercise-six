@@ -1,4 +1,3 @@
-// import userEvent from "@testing-library/user-event";
 import { useNavigate } from "react-router";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import React, { useCallback, useState, useEffect } from "react";
@@ -19,8 +18,6 @@ function CreateUserPage({ isLoggedIn, setIsLoggedIn, setUserInformation }) {
 
       const email = e.currentTarget.email.value;
       const password = e.currentTarget.password.value;
-
-      console.log(email, password);
 
       const auth = getAuth();
 

@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  // createUserWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import React from "react";
 
@@ -14,8 +10,6 @@ import "./App.css";
 import CreateUserPage from "./pages/CreateUser";
 import LoginPage from "./pages/Login";
 import UserProfilePage from "./pages/UserProfile";
-
-// import Header from "./components/Header";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZ-QvGyKiP8YVv-JWxNTrT1a5bWiM1NEs",
@@ -52,8 +46,6 @@ function App() {
       });
     }
   }, [appInitialized]);
-
-  console.log(userInformation);
 
   const router = createBrowserRouter([
     {
